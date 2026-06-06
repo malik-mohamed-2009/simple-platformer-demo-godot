@@ -1,1 +1,1 @@
-# casual-3d-platformer-godot
+# Casual 2D Platformer Demo
