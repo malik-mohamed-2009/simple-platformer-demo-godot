@@ -329,12 +329,6 @@ distance = -1.5
 [node name="Player" parent="." unique_id=1799037763 instance=ExtResource("1_2y5yt")]
 position = Vector2(49, 117)
 
-[node name="Button" type="Button" parent="Player" unique_id=1805131252]
-offset_left = -25.0
-offset_top = -6.0
-offset_right = 14.0
-offset_bottom = 11.0
-
 [node name="Ui" type="CanvasLayer" parent="." unique_id=1521953561]
 
 [node name="Game" type="Control" parent="Ui" unique_id=1659162186]
