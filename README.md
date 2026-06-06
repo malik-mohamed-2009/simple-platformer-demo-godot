@@ -1,3 +1,3 @@
 # ✨ Casual 2D Platformer Demo ✨
-😎 - Best for beginners and your first game\n
+😎 - Best for beginners and your first game
 🕹️ - Better physics with TouchScreen
