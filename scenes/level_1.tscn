@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cx84px1x0kra4" path="res://icons/arrow.png" id="5_15mv3"]
 [ext_resource type="Texture2D" uid="uid://cprdjoq35r5fd" path="res://icons/arrow_press.png" id="6_e3sih"]
 [ext_resource type="Texture2D" uid="uid://r31oeetebgry" path="res://sprites/bg.png" id="6_fcfvj"]
+[ext_resource type="Script" uid="uid://dlxx454t2ttrs" path="res://scripts/coin.gd" id="8_2y5yt"]
 [ext_resource type="AudioStream" uid="uid://bvv2uw5onylcc" path="res://audio/bgm.ogg" id="8_15mv3"]
 [ext_resource type="Script" uid="uid://cqs0hrhro0cux" path="res://scripts/level_manager.gd" id="10_2y5yt"]
 
@@ -324,12 +325,47 @@ stacked_outline_1/color = Color(1, 1, 1, 1)
 normal = Vector2(1, 0)
 distance = -1.5
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y5yt"]
+atlas = ExtResource("2_bswci")
+region = Rect2(198, 126, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2os1m"]
+atlas = ExtResource("2_bswci")
+region = Rect2(216, 126, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_go7sj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y5yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2os1m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gny6"]
+radius = 6.0827627
+
 [node name="Level1" type="Node" unique_id=397061002]
 
-[node name="Player" parent="." unique_id=1799037763 instance=ExtResource("1_2y5yt")]
-position = Vector2(49, 117)
+[node name="Player" parent="." unique_id=1799037763 node_paths=PackedStringArray("coin_label") instance=ExtResource("1_2y5yt")]
+position = Vector2(58, 85)
+coin_label = NodePath("../Ui/Game/CoinLabel")
 
 [node name="Ui" type="CanvasLayer" parent="." unique_id=1521953561]
+
+[node name="ColorRect" type="ColorRect" parent="Ui" unique_id=274729999]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Game" type="Control" parent="Ui" unique_id=1659162186]
 layout_mode = 3
@@ -364,12 +400,22 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("4_e3sih")
 theme_override_font_sizes/font_size = 8
-text = "Soon..."
+text = "c"
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="Left" type="TouchScreenButton" parent="Ui/Game" unique_id=152096756]
-position = Vector2(12, 168)
+[node name="Mobile" type="Control" parent="Ui/Game" unique_id=978052337]
+modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Left" type="TouchScreenButton" parent="Ui/Game/Mobile" unique_id=152096756]
+position = Vector2(12, 132)
 rotation = -1.5707964
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_15mv3")
@@ -379,8 +425,8 @@ action = "ui_left"
 visibility_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Right" type="TouchScreenButton" parent="Ui/Game" unique_id=652292920]
-position = Vector2(100, 130)
+[node name="Right" type="TouchScreenButton" parent="Ui/Game/Mobile" unique_id=652292920]
+position = Vector2(98, 94)
 rotation = 1.5707964
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_15mv3")
@@ -390,8 +436,8 @@ action = "ui_right"
 visibility_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Jump" type="TouchScreenButton" parent="Ui/Game" unique_id=1879065283]
-position = Vector2(268, 130)
+[node name="Jump" type="TouchScreenButton" parent="Ui/Game/Mobile" unique_id=1879065283]
+position = Vector2(206, 96)
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_15mv3")
 texture_pressed = ExtResource("6_e3sih")
@@ -400,8 +446,8 @@ action = "ui_accept"
 visibility_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Pause" type="TouchScreenButton" parent="Ui/Game" unique_id=2093710401]
-position = Vector2(296, 4)
+[node name="Pause" type="TouchScreenButton" parent="Ui/Game/Mobile" unique_id=2093710401]
+position = Vector2(232, 4)
 texture_normal = ExtResource("5_15mv3")
 texture_pressed = ExtResource("6_e3sih")
 passby_press = true
@@ -509,16 +555,16 @@ metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Envi" unique_id=1174157190]
 z_index = -1
-tile_map_data = PackedByteArray("AAACAAgAAAACAAEAAAADAAgAAAACAAEAAAAEAAgAAAACAAEAAAAFAAgAAAADAAEAAAALAAgAAAACAAAAAAAMAAgAAAACAAAAAAANAAgAAAACAAAAAAAOAAgAAAADAAAAAAAKAAgAAAACAAAAAAAJAAgAAAABAAAAAAAAAAgAAAACAAEAAAABAAgAAAACAAEAAAAAAAsAAAACAAYAAAABAAsAAAACAAYAAAACAAsAAAACAAYAAAADAAsAAAACAAYAAAAEAAsAAAACAAYAAAAFAAsAAAADAAYAAAAAAAoAAAACAAYAAAAAAAkAAAACAAYAAAABAAkAAAACAAYAAAACAAkAAAACAAYAAAADAAkAAAACAAYAAAAEAAkAAAACAAYAAAABAAoAAAACAAYAAAACAAoAAAACAAYAAAADAAoAAAACAAYAAAAEAAoAAAACAAYAAAAFAAoAAAADAAYAAAAFAAkAAAADAAYAAAAJAAkAAAABAAYAAAAJAAoAAAABAAYAAAAJAAsAAAABAAYAAAAKAAkAAAACAAYAAAALAAkAAAACAAYAAAAMAAkAAAACAAYAAAANAAkAAAACAAYAAAAOAAkAAAADAAYAAAAKAAoAAAACAAYAAAALAAoAAAACAAYAAAAMAAoAAAACAAYAAAANAAoAAAACAAYAAAAOAAoAAAADAAYAAAAKAAsAAAACAAYAAAALAAsAAAACAAYAAAAMAAsAAAACAAYAAAANAAsAAAACAAYAAAAOAAsAAAADAAYAAAAUAAgAAAAOAAAAAAAUAAkAAAAMAAEAAAAUAAoAAAAMAAIAAAAUAAsAAAAMAAIAAAAXAAgAAAAMAAAAAAAXAAkAAAAMAAEAAAAXAAoAAAAMAAIAAAAXAAsAAAAMAAIAAAAaAAgAAAAMAAAAAAAaAAkAAAAMAAEAAAAaAAoAAAAMAAIAAAAaAAsAAAAMAAIAAAAdAAgAAAAMAAAAAAAdAAkAAAAMAAEAAAAdAAoAAAAMAAIAAAAdAAsAAAAMAAIAAAAgAAgAAAAPAAAAAAAgAAkAAAAMAAEAAAAgAAoAAAAMAAIAAAAgAAsAAAAMAAIAAAAVAAgAAAANAAAAAAAWAAgAAAANAAAAAAAYAAgAAAANAAAAAAAZAAgAAAANAAAAAAAbAAgAAAANAAAAAAAcAAgAAAANAAAAAAAeAAgAAAANAAAAAAAfAAgAAAANAAAAAAANAAcAAAARAAYAAAANAAYAAAARAAUAAAANAAUAAAARAAQAAAAMAAUAAAARAAIAAAAOAAUAAAATAAIAAAANAAQAAAASAAEAAAAMAAQAAAARAAEAAAAOAAQAAAATAAEAAAANAAMAAAASAAAAAAAOAAMAAAATAAAAAAAMAAMAAAARAAAAAAA=")
+tile_map_data = PackedByteArray("AAADAAgAAAACAAYAAAAEAAgAAAACAAYAAAAFAAgAAAADAAYAAAAAAAgAAAABAAYAAAABAAgAAAACAAYAAAANAAcAAAACAAYAAAAAAAcAAAABAAYAAAABAAcAAAACAAYAAAACAAcAAAACAAYAAAADAAcAAAACAAYAAAAEAAcAAAACAAYAAAAFAAcAAAADAAYAAAACAAgAAAACAAYAAAAAAAYAAAABAAEAAAAFAAYAAAADAAEAAAABAAYAAAACAAEAAAACAAYAAAACAAEAAAADAAYAAAACAAEAAAAEAAYAAAACAAEAAAAJAAYAAAABAAEAAAAKAAYAAAACAAEAAAALAAYAAAACAAEAAAAMAAYAAAACAAEAAAANAAYAAAACAAEAAAAOAAYAAAACAAEAAAAPAAYAAAACAAEAAAAQAAYAAAADAAEAAAAJAAcAAAABAAYAAAAJAAgAAAABAAYAAAAKAAcAAAACAAYAAAALAAcAAAACAAYAAAAMAAcAAAACAAYAAAAOAAcAAAACAAYAAAAPAAcAAAACAAYAAAAKAAgAAAACAAYAAAALAAgAAAACAAYAAAAMAAgAAAACAAYAAAANAAgAAAACAAYAAAAOAAgAAAACAAYAAAAPAAgAAAACAAYAAAAQAAcAAAADAAYAAAAQAAgAAAADAAYAAAAKAAUAAAAEAAYAAAADAAUAAAAEAAYAAAABAAUAAAAEAAYAAAANAAUAAAAHAAYAAAAPAAUAAAAEAAYAAAAMAAUAAAAGAAYAAAAUAAYAAAAMAAAAAAAVAAYAAAANAAAAAAAWAAYAAAANAAAAAAAXAAYAAAAMAAAAAAAYAAYAAAANAAAAAAAZAAYAAAANAAAAAAAaAAYAAAAMAAAAAAAbAAYAAAANAAAAAAAcAAYAAAANAAAAAAAdAAYAAAAMAAAAAAAeAAYAAAANAAAAAAAfAAYAAAANAAAAAAAgAAYAAAAMAAAAAAAXAAcAAAAMAAEAAAAXAAgAAAAMAAIAAAAaAAcAAAAMAAEAAAAaAAgAAAAMAAEAAAAdAAcAAAAMAAEAAAAdAAgAAAAMAAIAAAAUAAcAAAAMAAEAAAAUAAgAAAAMAAIAAAAgAAgAAAAMAAIAAAAgAAcAAAAMAAEAAAATAAYAAAAOAAAAAAA=")
 tile_set = SubResource("TileSet_5xbjy")
 metadata/_edit_lock_ = true
 
 [node name="SoonLab" type="Label" parent="Envi" unique_id=300467692]
 z_index = -1
 offset_left = 320.0
-offset_top = 64.0
+offset_top = 32.0
 offset_right = 528.0
-offset_bottom = 127.99957
+offset_bottom = 96.0
 text = "Enjoy your first game!"
 label_settings = SubResource("LabelSettings_2y5yt")
 horizontal_alignment = 1
@@ -528,11 +574,11 @@ metadata/_edit_lock_ = true
 [node name="Sky" type="Parallax2D" parent="Envi" unique_id=1431535086]
 z_index = -24
 scroll_scale = Vector2(0.4, 0.4)
-repeat_size = Vector2(240, 0)
+repeat_size = Vector2(192, 0)
 repeat_times = 256
 
 [node name="Sprite2D" type="Sprite2D" parent="Envi/Sky" unique_id=15627080]
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2, 2)
 texture = ExtResource("6_fcfvj")
 centered = false
 hframes = 2
@@ -542,6 +588,60 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Envi/Bound" unique_id=1006526244]
 shape = SubResource("WorldBoundaryShape2D_2y5yt")
+
+[node name="Coins" type="Node2D" parent="Envi" unique_id=125659090]
+
+[node name="Coin" type="Area2D" parent="Envi/Coins" unique_id=183172761]
+position = Vector2(160, 84)
+script = ExtResource("8_2y5yt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Envi/Coins/Coin" unique_id=2030208174]
+sprite_frames = SubResource("SpriteFrames_go7sj")
+autoplay = "default"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Envi/Coins/Coin" unique_id=702813945]
+shape = SubResource("CircleShape2D_7gny6")
+metadata/_edit_lock_ = true
+
+[node name="Coin2" type="Area2D" parent="Envi/Coins" unique_id=772794481]
+position = Vector2(180, 84)
+script = ExtResource("8_2y5yt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Envi/Coins/Coin2" unique_id=1777619727]
+sprite_frames = SubResource("SpriteFrames_go7sj")
+autoplay = "default"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Envi/Coins/Coin2" unique_id=1106367185]
+shape = SubResource("CircleShape2D_7gny6")
+metadata/_edit_lock_ = true
+
+[node name="Coin3" type="Area2D" parent="Envi/Coins" unique_id=2011315284]
+position = Vector2(220, 84)
+script = ExtResource("8_2y5yt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Envi/Coins/Coin3" unique_id=939524497]
+sprite_frames = SubResource("SpriteFrames_go7sj")
+autoplay = "default"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Envi/Coins/Coin3" unique_id=335453242]
+shape = SubResource("CircleShape2D_7gny6")
+metadata/_edit_lock_ = true
+
+[node name="Coin4" type="Area2D" parent="Envi/Coins" unique_id=269128820]
+position = Vector2(260, 84)
+script = ExtResource("8_2y5yt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Envi/Coins/Coin4" unique_id=1266421702]
+sprite_frames = SubResource("SpriteFrames_go7sj")
+autoplay = "default"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Envi/Coins/Coin4" unique_id=490967413]
+shape = SubResource("CircleShape2D_7gny6")
+metadata/_edit_lock_ = true
 
 [node name="Bgm" type="AudioStreamPlayer" parent="." unique_id=481325104]
 stream = ExtResource("8_15mv3")
@@ -554,3 +654,7 @@ script = ExtResource("10_2y5yt")
 ui = NodePath("../Ui")
 
 [connection signal="pressed" from="Ui/Pause/Panel/HBoxContainer/Play" to="LevelManager" method="_on_pm_play_pressed"]
+[connection signal="body_entered" from="Envi/Coins/Coin" to="Envi/Coins/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="Envi/Coins/Coin2" to="Envi/Coins/Coin2" method="_on_body_entered"]
+[connection signal="body_entered" from="Envi/Coins/Coin3" to="Envi/Coins/Coin3" method="_on_body_entered"]
+[connection signal="body_entered" from="Envi/Coins/Coin4" to="Envi/Coins/Coin4" method="_on_body_entered"]

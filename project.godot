@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Casual 2D Platformer Demo"
+config/name="Casual 2D Platformer"
 config/description="✨ Casual 2D Platformer Demo ✨
 😎 - Best for beginners and your first game
 🕹️ - Better controls with TouchScreen"
@@ -30,12 +30,10 @@ JumpSfx="*uid://cititixminc7o"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=180
+window/size/viewport_width=256
+window/size/viewport_height=144
 window/size/mode=3
 window/size/resizable=false
-window/size/window_width_override=1920
-window/size/window_height_override=1080
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
@@ -46,7 +44,6 @@ rendering/root_node_layout_direction=1
 [physics]
 
 3d/physics_engine="Dummy"
-common/physics_interpolation=true
 
 [rendering]
 
