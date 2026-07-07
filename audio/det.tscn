@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://c1nxby52rshc3"]
-
-[ext_resource type="AudioStream" uid="uid://b0vqcliwx1i00" path="res://audio/det.wav" id="1_1b45l"]
-
-[node name="Det" type="AudioStreamPlayer" unique_id=1980768599]
-process_mode = 3
-stream = ExtResource("1_1b45l")
-bus = &"Sfx"
