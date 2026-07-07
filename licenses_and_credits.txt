@@ -1,0 +1,24 @@
+=========================================
+THIRD-PARTY LICENSES & ATTRIBUTIONS
+=========================================
+
+GRAPHICS & AUDIO (CC0)
+----------------------
+- "Pixel Platformer (1.2)" art assets by Kenney (www.kenney.nl).
+- "8-bit Coin" & "8-bit Jump" sound effects by malikmohamed0000.
+(Licensed under Creative Commons Zero / Public Domain)
+
+BACKGROUND MUSIC (CC BY 4.0)
+----------------------------
+- "CHANNELING 128BPM [MELODIC_DATA_STREAM // SEAMLESS LOOP] - GLORYTOTHEMACHINE" 
+  by GloryToTheMachine (https://freesound.org/s/850503/)
+  Licensed under Creative Commons Attribution 4.0 International
+  https://creativecommons.org/licenses/by/4.0/
+
+FONTS (SIL OFL 1.1)
+-------------------
+Copyright 2012 The Press Start 2P Project Authors (cody@zone38.net), with Reserved Font Name "Press Start 2P".
+Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla/Montserrat.git)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+The full license text is included in the game files as 'ofl.txt'.

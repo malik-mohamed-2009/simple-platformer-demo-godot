@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://bae6mpkkx5ake"]
+
+[ext_resource type="Script" uid="uid://cqs0hrhro0cux" path="res://scripts/level_manager.gd" id="1_06fa7"]
+
+[sub_resource type="Animation" id="Animation_15mv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ui/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ui/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2y5yt"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ui/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ui/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e3sih"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ui/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ui/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2y5yt"]
+_data = {
+&"RESET": SubResource("Animation_15mv3"),
+&"fade_in": SubResource("Animation_2y5yt"),
+&"fade_out": SubResource("Animation_e3sih")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7b7a"]
+size = Vector2(18, 21)
+
+[node name="LevelManager" type="Node" unique_id=17573122 node_paths=PackedStringArray("player", "ui")]
+process_mode = 3
+script = ExtResource("1_06fa7")
+player = NodePath("")
+ui = NodePath("")
+change_lev = "res://scenes/level_1.tscn"
+
+[node name="Los" type="Timer" parent="." unique_id=2004939241]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=427834062]
+libraries/ = SubResource("AnimationLibrary_2y5yt")
+
+[node name="WinArea" type="Area2D" parent="." unique_id=1519543442]
+position = Vector2(328, 97)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea" unique_id=1810979128]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_g7b7a")
+metadata/_edit_lock_ = true
+
+[connection signal="timeout" from="Los" to="." method="_on_los_timeout"]
+[connection signal="body_entered" from="WinArea" to="." method="_on_win_area_body_entered"]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cititixminc7o"]
+
+[ext_resource type="AudioStream" uid="uid://df3v6o0swehit" path="res://audio/jump.wav" id="1_3k3nt"]
+
+[node name="Jump" type="AudioStreamPlayer" unique_id=399275590]
+stream = ExtResource("1_3k3nt")
+bus = &"Sfx"

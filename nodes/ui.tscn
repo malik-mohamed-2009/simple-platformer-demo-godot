@@ -1,0 +1,338 @@
+[gd_scene format=3 uid="uid://nwo75i3hy38m"]
+
+[ext_resource type="Texture2D" uid="uid://df0k7tqbv6ygx" path="res://sprites/tilemap.png" id="1_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://cx84px1x0kra4" path="res://icons/arrow.png" id="3_8dubc"]
+[ext_resource type="Texture2D" uid="uid://cprdjoq35r5fd" path="res://icons/arrow_press.png" id="4_p7vwb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15mv3"]
+atlas = ExtResource("1_gdt2y")
+region = Rect2(198, 126, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3sih"]
+atlas = ExtResource("1_gdt2y")
+region = Rect2(216, 126, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2y5yt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15mv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3sih")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3sih"]
+bg_color = Color(1, 0.9137255, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2y5yt"]
+bg_color = Color(1, 0.54901963, 0.92156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2os1m"]
+bg_color = Color(1, 0.9137255, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+shadow_size = 1
+
+[sub_resource type="Animation" id="Animation_rd3pg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pause/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pause:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qwmkn"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pause/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(96, -64), Vector2(96, 60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pause:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_m6oha"]
+resource_name = "res"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pause/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(96, 60.000053), Vector2(96, 184)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pause:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.09, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rd3pg"]
+_data = {
+&"RESET": SubResource("Animation_rd3pg"),
+&"new_animation": SubResource("Animation_qwmkn"),
+&"res": SubResource("Animation_m6oha")
+}
+
+[node name="Ui" type="CanvasLayer" unique_id=139903261]
+
+[node name="Game" type="Control" parent="." unique_id=1336870021]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Coin" type="AnimatedSprite2D" parent="Game" unique_id=676678354]
+position = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_2y5yt")
+animation = &"new_animation"
+metadata/_edit_lock_ = true
+
+[node name="Coin" type="AnimatedSprite2D" parent="Game/Coin" unique_id=272363619]
+modulate = Color(0, 0, 0, 0.6)
+z_index = -1
+position = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_2y5yt")
+animation = &"new_animation"
+metadata/_edit_lock_ = true
+
+[node name="CoinLabel" type="Label" parent="Game" unique_id=1198808627]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 6.0
+offset_right = 86.0
+offset_bottom = 28.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 8
+text = "c"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Mobile" type="Control" parent="Game" unique_id=1137557804]
+modulate = Color(1, 1, 1, 0.4862745)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Left" type="TouchScreenButton" parent="Game/Mobile" unique_id=1841429251]
+position = Vector2(16, 172)
+rotation = -1.5707964
+scale = Vector2(2, 2)
+texture_normal = ExtResource("3_8dubc")
+texture_pressed = ExtResource("4_p7vwb")
+passby_press = true
+action = "ui_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="Game/Mobile" unique_id=1150517981]
+position = Vector2(102, 134)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+texture_normal = ExtResource("3_8dubc")
+texture_pressed = ExtResource("4_p7vwb")
+passby_press = true
+action = "ui_right"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="Game/Mobile" unique_id=1825768342]
+position = Vector2(266, 134)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("3_8dubc")
+texture_pressed = ExtResource("4_p7vwb")
+passby_press = true
+action = "ui_accept"
+visibility_mode = 1
+
+[node name="Pause" type="TouchScreenButton" parent="Game/Mobile" unique_id=548878766]
+position = Vector2(297, 4)
+texture_normal = ExtResource("3_8dubc")
+texture_pressed = ExtResource("4_p7vwb")
+passby_press = true
+action = "ui_cancel"
+visibility_mode = 1
+
+[node name="Pause" type="Control" parent="." unique_id=1646489697]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Pause" unique_id=1657767826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6666667)
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="Pause" unique_id=1233902024]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -30.0
+offset_right = 64.0
+offset_bottom = 29.999977
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3sih")
+
+[node name="Label" type="Label" parent="Pause/Panel" unique_id=1131603737]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 8
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause/Panel" unique_id=206244450]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -32.0
+offset_right = 56.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="Play" type="Button" parent="Pause/Panel/HBoxContainer" unique_id=347422790]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2y5yt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2os1m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2y5yt")
+text = "PLAY"
+metadata/_edit_lock_ = true
+
+[node name="Reset" type="Button" parent="Pause/Panel/HBoxContainer" unique_id=907005336]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2y5yt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2os1m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2y5yt")
+text = "RESET"
+metadata/_edit_lock_ = true
+
+[node name="PauseMenuAnimation" type="AnimationPlayer" parent="Pause" unique_id=1873609478]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_rd3pg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=664612680]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true

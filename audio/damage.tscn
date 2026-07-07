@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dsfc5doqb22k2"]
+
+[ext_resource type="AudioStream" uid="uid://d03g82k1tqtqu" path="res://audio/damage.wav" id="1_phu5b"]
+
+[node name="Damage" type="AudioStreamPlayer" unique_id=2127567748]
+stream = ExtResource("1_phu5b")
+bus = &"Sfx"
