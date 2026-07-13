@@ -26,6 +26,7 @@ func _physics_process(delta):
 	
 	if win:
 		player.global_position = $WinArea.global_position
+		player.perform_jump = false
 
 func _on_pm_play_pressed():
 	get_tree().paused = false
