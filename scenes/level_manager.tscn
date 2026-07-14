@@ -58,6 +58,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_e3sih"]
 resource_name = "new_animation"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -77,7 +78,7 @@ tracks/1/path = NodePath("../Ui/ColorRect:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.7, 1),
+"times": PackedFloat32Array(0.7, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -93,14 +94,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7b7a"]
 size = Vector2(18, 21)
 
-[node name="LevelManager" type="Node" unique_id=17573122 node_paths=PackedStringArray("player", "ui")]
+[node name="LevelManager" type="Node" unique_id=17573122]
 process_mode = 3
 script = ExtResource("1_06fa7")
-player = NodePath("")
-ui = NodePath("")
 change_lev = "res://scenes/level_1.tscn"
 
 [node name="Los" type="Timer" parent="." unique_id=2004939241]
+wait_time = 1.5
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=427834062]
