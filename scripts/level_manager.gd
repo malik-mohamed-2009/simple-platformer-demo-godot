@@ -25,7 +25,9 @@ func _physics_process(delta):
 		$AnimationPlayer.play("fade_out")
 	
 	if win:
-		player.global_position = $WinArea.global_position
+		player.velocity = Vector2(0, 0)
+		player.scale = lerp(player.scale, Vector2(0, 0), 0.1)
+		player.global_position = lerp(player.global_position, $WinArea.global_position, 0.1)
 		player.perform_jump = false
 
 func _on_pm_play_pressed():
@@ -45,6 +47,5 @@ func _on_los_timeout():
 func _on_win_area_body_entered(body):
 	if body.name == "Player":
 		win = true
-		body.get_node("Body").hide()
 		$AnimationPlayer.play("fade_out")
 		$Los.start()
