@@ -56,7 +56,7 @@ size = Vector2(20, 23)
 script = ExtResource("1_bms3g")
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1101543449]
-offset = Vector2(0, 72)
+offset = Vector2(0, 90)
 limit_left = 0
 limit_top = 0
 limit_bottom = 0
